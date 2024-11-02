@@ -22,7 +22,7 @@ frontend:
     build:
       commands:
         - mkdir ./dist && touch ./dist/index.html
-        - npx expo build:web  # Using the local Expo CLI instead of global expo-cli
+        - npx expo export  # Using the local Expo CLI instead of global expo-cli
   artifacts:
     baseDirectory: web-build
     files:
