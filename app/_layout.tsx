@@ -6,9 +6,13 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Amplify } from 'aws-amplify';
+import outputs from "@/amplify_outputs.json";
+import { Authenticator } from '@aws-amplify/ui-react-native';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+Amplify.configure(outputs);
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -28,10 +32,12 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
+      <Authenticator.Provider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+      </Authenticator.Provider>
     </ThemeProvider>
   );
 }
