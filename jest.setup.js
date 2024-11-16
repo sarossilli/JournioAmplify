@@ -1,4 +1,3 @@
-// jest.setup.js
 import '@testing-library/jest-native';
 
 // Mock the Amplify UI Components

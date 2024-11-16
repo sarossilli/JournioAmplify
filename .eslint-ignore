@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+/dist/
+/build/
+/coverage/
+
+# Config files
+*.config.js
+metro.config.js
+babel.config.js
+jest.setup.js
+
+# Test files
+__tests__/
+*.test.ts
+*.test.tsx
+__snapshots__/
+
+# Other assets
+assets/
+*.d.ts
+
+# Only lint these folders
+!app/**/*
+!components/**/*
+!constants/**/*
+!hooks/**/*

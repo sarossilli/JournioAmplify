@@ -23,6 +23,9 @@ frontend:
       commands:
         - mkdir ./dist && touch ./dist/index.html
         - npx expo export  # Using the local Expo CLI instead of global expo-cli
+    unitTest:
+      commands:
+        - npm test
   artifacts:
     baseDirectory: dist
     files:
