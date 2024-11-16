@@ -1,6 +1,7 @@
 import { Authenticator, AuthenticatorProps, ThemeProvider, useAuthenticator } from "@aws-amplify/ui-react-native";
-import React from "react";
-import { Button, View, StyleSheet, useColorScheme } from "react-native";
+import React, { useEffect } from "react";
+import { View, StyleSheet, useColorScheme } from "react-native";
+import { useRouter } from 'expo-router';
 import { LightAuthAmplifyTheme, DarkAuthAmplifyTheme } from '@/constants/Theme';
 
 export type AuthProps = AuthenticatorProps & {
@@ -8,28 +9,37 @@ export type AuthProps = AuthenticatorProps & {
     darkColor?: string;
 };
 
+export function AuthContent() {
+    const { authStatus } = useAuthenticator();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (authStatus === 'authenticated') {
+            router.replace('/(app)/home');
+        }
+    }, [authStatus]);
+
+    return <View style={styles.container} />;
+}
+
 export function Auth() {
     const colorScheme = useColorScheme();
     const theme = colorScheme === 'dark' ? DarkAuthAmplifyTheme : LightAuthAmplifyTheme;
 
     return (
         <ThemeProvider theme={theme}>
-            <View style={styles.container}>
-                <Authenticator loginMechanisms={['email']} components={{}} />
-            </View>
+            <Authenticator
+                loginMechanisms={['email']}
+                initialState="signUp"
+            >
+                <AuthContent />
+            </Authenticator>
         </ThemeProvider>
     );
 }
 
-// Define styles to center and limit the width of the container
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        maxWidth: 400,
-        width: '100%',
     },
 });
-
