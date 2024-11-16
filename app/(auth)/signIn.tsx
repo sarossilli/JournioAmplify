@@ -3,7 +3,7 @@ import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Redirect } from 'expo-router';
 import { fetchAuthSession } from 'aws-amplify/auth';
-import { Auth } from '@/components/Auth';
+import { Auth } from '@/components/auth/Auth';
 
 export default function SignIn() {
   const [authState, setAuthState] = React.useState({
